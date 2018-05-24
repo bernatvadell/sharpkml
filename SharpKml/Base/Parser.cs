@@ -59,7 +59,7 @@ namespace SharpKml.Base
         public void Parse(Stream input)
         {
             this.defaultNamespace = null; // This method is strict about namespaces
-            var reader = XmlReader.Create(input);
+            var reader = XmlReader.Create(input, new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore });
             this.Parse(reader);
         }
 
@@ -80,7 +80,7 @@ namespace SharpKml.Base
         public void Parse(TextReader input)
         {
             this.defaultNamespace = null; // This method is strict about namespaces
-            var reader = XmlReader.Create(input);
+            var reader = XmlReader.Create(input, new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore });
             this.Parse(reader);
         }
 
@@ -112,7 +112,7 @@ namespace SharpKml.Base
                     this.Parse(
                         XmlReader.Create(
                         stream,
-                        new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment },
+                        new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment, DtdProcessing = DtdProcessing.Ignore },
                         new XmlParserContext(null, new IgnoreNamespaceManager(), null, XmlSpace.Default)));
                 }
             }
